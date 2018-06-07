@@ -1,0 +1,4 @@
+/* When the viewport is wider than 500px, the background of the page will be blue  */
+body {
+  background-color: blue;
+}

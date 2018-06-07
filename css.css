@@ -1,0 +1,56 @@
+/* Any filter that meets the critiera of the resulting CSS block, with be applied using the standard CSS rules of precedence */
+
+/* SIMPLE MEDIA QUERIES: testing only 1 charactersistic (e.g. min-width: 500px)  */
+/*  Here, this means, when the viewport is less than 500px, no styles are applied. But at or above 500px, the body color becomes orange */
+  @media screen and (min-width: 500px) {
+    body { color: #F79420; }
+  }
+  /* Here, this means, when the viewport is at or above 800px, not only is the orange text applied, but so is the blue background */
+  @media screen and (min-width: 800px) {
+    body { background-color: blue; }
+  }
+
+  /* MAX-WIDTH rules are applied anytime that the VIEWPORT WIDTH is LESS THAN the value specified (in this example, its 500px or less)
+   max-width 500px is matched when the viewport is 500px or less (e.g. 450px) and is NOT appliod with the viewport is, for example, 550px:
+
+    @media screen and (max-width: 500px) {
+      .yes {
+        opacity: 1;
+      }
+      .no {
+        opacity: 0
+      }
+    } */
+
+/* COMPLEX MEDIA QUERIES */
+/* This COMPLEX media query only applies styles when the screen width is greater than 500 px
+  AND the screen width has to also be less than 600px
+  So this media query is ONLY applied BETWEEN 500px AND 600px */
+  @media screen and (min-width: 500px) and (max-width: 600px) {
+    body { background-color: red; }
+  }
+
+@media screen and (max-width: 991px) {
+  .facetapi-facetapi-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .facetapi-facetapi-links > li {
+    order: 1;
+  }
+
+  .facetapi-facetapi-links > li.facetapi-item-active {
+    order: 0;
+  }
+
+  .facetapi-facets .item-list .leaf {
+    display: none;
+  }
+
+  .facetapi-facets .item-list .leaf.facetapi-item-active,
+  .facetapi-facets .item-list.show-items .leaf {
+    display: block;
+  }
+
+}
