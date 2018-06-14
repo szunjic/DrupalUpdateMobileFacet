@@ -48,8 +48,9 @@
     display: none;
   }
 
+/* 2 conditio when .leaf will be showing */
   .facetapi-facets .item-list .leaf.facetapi-item-active,
-  .facetapi-facets .item-list.show-items .leaf {
+  .facetapi-facets .item-list.show-filters .leaf {
     display: block;
   }
 
