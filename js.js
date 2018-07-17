@@ -1,38 +1,56 @@
+// **Remember**:
+  // The JS is just toggling presentation attributes (i.e. causing state changes to DOM)
+  // The CSS is handling what happens when these presentation attributes are toggling
+
+// Workflow 1 - User Clicks the Active Filter ('facetapi-active')
+  // The user is already on the active filter ('facetapi-active')
+    // This means they are seeing the content of the active filter ('facetapi-active')
+    // No need to hyper link the user back to the active filter page they are on
+  // They do, however, have filter options and need a way to see those filters
+    // This means clicking the active filter ('facetapi-active') can be used as the means of exposing the other page filters (show-filters ?)
+  // Clicking the active filter again should be used to hide visible filters.
+
+// Workflow 2 - User Has Exposed All Filters and Wants to Link to a Filter Page
+  // Now the user can see all of their options
+  // Clicking any of the non-active filters should allow the browser to link to that filter page
+  // Since the user made a filter selection, 
+    // hide the other filters
+    // and make sure the previous active filter no longer has the active state
+    // and set the active filter state on the filter option the user selected.
+
 $(function() {
   $( '.facetapi-facets .leaf > .facetapi-active' ).parent().addClass( 'facetapi-item-active' );
 
   $( '.facetapi-facets' ).on( 'click touchend', '.leaf > a', function( e ) {
-    // e.target
-    // e.currentTarget
-    var $this = $( e.currentTarget ); // current clicked element
+    // Save the clicked element as a jQuery obj variable
+    var $this = $( e.currentTarget ); // Currently clicked element
     var $itemList = $( '.facetapi-facets .item-list' ); // div.item-list element
 
-    // if $this .hasClass facetapi-active is true..
-    if ($this.hasClass('facetapi-active')) {
+    // If $this .hasClass active filter ('facetapi-active')
+    if ( $this.hasClass( 'facetapi-active' ) ) {
+      // User seeing content of active filter
+      // User already on page -- No need to hyper link back to active filter page
       e.preventDefault();
-    // .toggleClass on the $( '.facetapi-facets .item-list' ) to .show-filters
-      $itemList.toggleClass( 'show-filters' );
-    }
-    // else
-    // remove the active class (from a, and it's parent li)
-    //else {
-      //$itemList.removeClass( 'facetapi-active');
-      // ** OR ..
-      // $('a').parent().removeClass('facetapi-active')
+
+      // User needs a way to see other filter options
+      // Clicking the current active filter ('facetapi-active')
+          // Exposes the other page filters ('show-filters')
+
+     // Show or hide other filters: .toggleClass on the $('.facetapi-facets .item-list') to ('show-filters')
+     $itemList.toggleClass( 'show-filters' );
 
 
-  //  };
-
-    // if $this .hasClass facetapi-active is false..
-    if (!$this.hasClass('facetapi-active')) {
+    // If it is not the active filter ('facetapi-active')
+  } else {
       e.preventDefault();
-      // find element with .facetapi-active .removeClass .facetapi-active on its parent .removeClass .facetapi-item-active
-      $('.facetapi-active').parent().removeClass('.facetapi-item-active'); /// ** here using jQuery, do I need to provide a 'context' parameter ?
-      // $this addClass .facetapi-active and to parent li addClass .facetapi-item-active
-      $this.addClass('.facetapi-active').parent().addClass('.facetapi-item-active');
-      // .toggleClass on the .facetapi-facets .item-list to .show-filters
-      $itemList.toggleClass( 'show-filters' );
-    }
+    // Set new active filter and hyper link to filtered page      // TO DO: hyperlink to selected link ****
+    var $active = $('.facetapi-active'); // or $('.facetapi-active .show-filters') ?
+    $active.removeClass('facetapi-active').parent().removeClass( 'facetapi-item-active' );
+    $this.addClass('facetapi-active').parent().addClass('facetapi-item-active');
+    $itemList.removeClass('show-filters');
+    //.parent().removeClass( 'show-filters' );
+    //$itemList.removeClass('show-filters');
+  };
 
   });
 });
