@@ -54,3 +54,27 @@ $(function() {
 
   });
 });
+
+
+// In livestrong.js (at bottom):
+/* Write you JS below this comment in the closure */
+(function( $ ) {
+	Drupal.behaviors.FacetFilters = {
+		attach: function( context, settings ) {
+			/* Write here. */
+			//$( '.mySelector', context );
+
+			// Access media queries ?
+			// Assign them to show their CSS properties at their respective breakpoints ?
+			var mqSmall = window.matchMedia( "(max-width: 767px)" ); // Mobile
+
+// matches property returns true or false depending in the query result ?
+			if (mq.matches) {
+				// window width is at least 767px
+			} else {
+				// window width is less than 767px
+			}
+
+		}
+	}
+})( jQuery );
